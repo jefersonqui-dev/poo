@@ -3,60 +3,58 @@ public class CuentaBancaria {
     private String nombreTitular;
     private double saldo;
 
-    public CuentaBancaria(String numeroCuenta, String nombreTitular) {
-        this.numeroCuenta = numeroCuenta;
-        this.nombreTitular = nombreTitular;
+    // Constructor por defecto
+    public CuentaBancaria() {
+        this.numeroCuenta = "";
+        this.nombreTitular = "";
         this.saldo = 0.0;
     }
 
-    // Constructor que recibe número de cuenta, nombre del titular y saldo inicial
-    public CuentaBancaria(String numeroCuenta, String nombreTitular, double saldoInicial) {
+    // Constructor con parámetros
+    public CuentaBancaria(String numeroCuenta, String nombreTitular, double saldo) {
         this.numeroCuenta = numeroCuenta;
         this.nombreTitular = nombreTitular;
-        this.saldo = saldoInicial;
+        this.saldo = saldo;
     }
 
+    // Métodos getters y setters
     public String getNumeroCuenta() {
-        return this.numeroCuenta;
+        return numeroCuenta;
+    }
+
+    public void setNumeroCuenta(String numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
     }
 
     public String getNombreTitular() {
-        return this.nombreTitular;
+        return nombreTitular;
+    }
+
+    public void setNombreTitular(String nombreTitular) {
+        this.nombreTitular = nombreTitular;
     }
 
     public double getSaldo() {
-        return this.saldo;
+        return saldo;
     }
 
-    // Método para depositar dinero en la cuenta
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    // Método para depositar dinero
     public void depositar(double cantidad) {
         if (cantidad > 0) {
             this.saldo += cantidad;
-            System.out.println("Depósito realizado exitosamente. Nuevo saldo: $" + this.saldo);
-        } else {
-            System.out.println("La cantidad a depositar debe ser mayor que cero.");
         }
     }
 
-    // Método para retirar dinero de la cuenta
-    public void retirar(double cantidad) {
-        if (cantidad > 0) {
-            if (this.saldo >= cantidad) {
-                this.saldo -= cantidad;
-                System.out.println("Retiro realizado exitosamente. Nuevo saldo: $" + this.saldo);
-            } else {
-                System.out.println("Fondos insuficientes para realizar el retiro.");
-            }
-        } else {
-            System.out.println("La cantidad a retirar debe ser mayor que cero.");
+    // Método para retirar dinero
+    public boolean retirar(double cantidad) {
+        if (cantidad > 0 && this.saldo >= cantidad) {
+            this.saldo -= cantidad;
+            return true;
         }
-    }
-
-    // Método para mostrar la información de la cuenta
-    public void mostrarInformacion() {
-        System.out.println("Información de la cuenta bancaria:");
-        System.out.println("Número de cuenta: " + this.numeroCuenta);
-        System.out.println("Nombre del titular: " + this.nombreTitular);
-        System.out.println("Saldo actual: $" + this.saldo);
+        return false;
     }
 }
